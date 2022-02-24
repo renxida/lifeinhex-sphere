@@ -98,11 +98,11 @@ $(window).load(function(){
 
         seenTiles = {};
         
-        currentTiles = hexasphere.tiles.slice().splice(0,12);
-        currentTiles.forEach(function(item){
-            seenTiles[item.toString()] = 1;
-            item.mesh.material.opacity = 1;
-        });
+        // currentTiles = hexasphere.tiles.slice().splice(0,12);
+        // currentTiles.forEach(function(item){
+        //     seenTiles[item.toString()] = 1;
+        //     item.mesh.material.opacity = 1;
+        // });
 
         window.hexasphere = hexasphere;
         introTick = 0;
@@ -115,6 +115,9 @@ $(window).load(function(){
     var cameraAngle = -Math.PI/1.5;
 
     var tick = function(){
+        
+        
+        
 
         var dt = Date.now() - lastTime;
 
@@ -132,15 +135,15 @@ $(window).load(function(){
 
         var nextTiles = [];
 
-        currentTiles.forEach(function(item){
-            item.neighbors.forEach(function(neighbor){
-                if(!seenTiles[neighbor.toString()]){
-                    neighbor.mesh.material.opacity = 1;
-                    nextTiles.push(neighbor);
-                    seenTiles[neighbor] = 1;
-                }
-            });
-        });
+        // currentTiles.forEach(function(item){
+        //     item.neighbors.forEach(function(neighbor){
+        //         if(!seenTiles[neighbor.toString()]){
+        //             neighbor.mesh.material.opacity = 1;
+        //             nextTiles.push(neighbor);
+        //             seenTiles[neighbor] = 1;
+        //         }
+        //     });
+        // });
 
         currentTiles = nextTiles;
 
@@ -197,5 +200,11 @@ $(window).load(function(){
     requestAnimationFrame(tick);
     window.scene = scene;
     window.createScene = createScene;
+    
+    randomize_sphere(window.hexasphere);
+
+    $(function(){
+        setInterval(function () {step_sphere(window.hexasphere);}, 1000);
+    });
 
 });
